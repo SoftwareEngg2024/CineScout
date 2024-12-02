@@ -1,192 +1,316 @@
-import unittest
-import warnings
-import sys
+# tests/test_auth.py
 
-sys.path.append("../")
-from Code.prediction_scripts.item_based import recommendForNewUser
+def test_register_success(client):
+    response = client.post("/register", data={
+        "username": "newuser",
+        "password": "newpassword"
+    })
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data["code"] == 200
+    assert data["redirect_url_key"] == "LOGIN"
+  
+def test_register_existing_username(client, new_user):
+    response = client.post("/register", data={
+        "username": "testuser",
+        "password": "anotherpassword"
+    })
+    assert response.status_code == 400
+    data = response.get_json()
+    assert data["code"] == 400
+    assert data["redirect_url_key"] == "REGISTER"
 
-warnings.filterwarnings("ignore")
+def test_register_missing_fields(client):
+    response = client.post("/register", data={
+        "username": "",
+        "password": ""
+    })
+    # Adjust assertions based on your error handling
+    assert response.status_code == 400
 
+def test_login_success(client, new_user):
+    response = client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data["code"] == 200
+    assert data["redirect_url_key"] == "HOME"
 
-class Tests(unittest.TestCase):
-    def testToyStory(self):
-        ts = [
-            {"title": "Toy Story (1995)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue("Toy Story 3 (2010)" in recommendations)
+def test_login_invalid_username(client):
+    response = client.post("/login", data={
+        "username": "nonexistent",
+        "password": "password"
+    })
+    assert response.status_code == 400
+    data = response.get_json()
+    assert data["code"] == 400
+    assert data["redirect_url_key"] == "REGISTER"
 
-    def testToyStoryNeg(self):
-        ts = [
-            {"title": "Toy Story (1995)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertFalse("Inception" in recommendations)
+def test_login_incorrect_password(client, new_user):
+    response = client.post("/login", data={
+        "username": "testuser",
+        "password": "wrongpassword"
+    })
+    assert response.status_code == 401
+    data = response.get_json()
+    assert data["code"] == 401
+    assert data["redirect_url_key"] == "LOGIN"
 
-    def testKunfuPanda(self):
-        ts = [
-            {"title": "Kung Fu Panda (2008)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue("Toy Story (1995)" in recommendations)
-
-    def testKunfuPandaNeg(self):
-        ts = [
-            {"title": "Kung Fu Panda (2008)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertFalse("Batman (2001)" in recommendations)
-
-    def testHorrorWithCartoon(self):
-        ts = [
-            {"title": "Strangers, The (2008)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue(("Toy Story (1995)" in recommendations) == False)
-
-    def testIronMan(self):
-        ts = [
-            {"title": "Iron Man (2008)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue(("Avengers: Infinity War - Part I (2018)" in recommendations))
-
-    def testRoboCop(self):
-        ts = [
-            {"title": "RoboCop (1987)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue(("RoboCop 2 (1990)" in recommendations))
-
-    def testNolan(self):
-        ts = [
-            {"title": "Inception (2010)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue(("Dark Knight, The (2008)" in recommendations))
-
-    def testDC(self):
-        ts = [
-            {"title": "Man of Steel (2013)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue(
-            ("Batman v Superman: Dawn of Justice (2016)" in recommendations)
-        )
-
-    def testArmageddon(self):
-        ts = [
-            {"title": "Armageddon (1998)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue(("2012 (2009)" in recommendations))
-
-    def testLethalWeapon(self):
-        ts = [
-            {"title": "Lethal Weapon (1987)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue(("Lethal Weapon 3 (1992)" in recommendations))
-
-    def testDarkAction(self):
-        ts = [
-            {"title": "Batman: The Killing Joke (2016)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue(("Punisher: War Zone (2008)" in recommendations))
-
-    def testDark(self):
-        ts = [
-            {"title": "Puppet Master (1989)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue(("Black Mirror: White Christmas (2014)" in recommendations))
-
-    def testHorrorComedy(self):
-        ts = [
-            {"title": "Scary Movie (2000)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue(("I Sell the Dead (2008)" in recommendations))
-
-    def testSuperHeroes(self):
-        ts = [
-            {"title": "Spider-Man (2002)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue(("Iron Man 2 (2010)" in recommendations))
-
-    def testCartoon(self):
-        ts = [
-            {"title": "Moana (2016)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue(("Monsters, Inc. (2001)" in recommendations))
-
-    def testMultipleMovies(self):
-        ts = [
-            {"title": "Harry Potter and the Goblet of Fire (2005)", "rating": 5.0},
-            {"title": "Twilight Saga: New Moon, The (2009)", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue(("Twilight (2008)" in recommendations))
-
-    def testEmptyInput(self):
-        ts = []
-        recommendations = recommendForNewUser(ts)
-        self.assertEqual(recommendations, [], "Empty input should result in empty recommendations")
-
-    def testInvalidRating(self):
-        ts = [{"title": "Toy Story (1995)", "rating": 6.0}]
-        recommendations = recommendForNewUser(ts)
-        self.assertEqual(recommendations, [], "Invalid rating should result in empty recommendations")
-
-    def testTooLongMovieTitle(self):
-        ts = [{"title": "T"*1000, "rating": 5.0}]
-        recommendations = recommendForNewUser(ts)
-        self.assertEqual(recommendations, [], "Too long movie titles should result in empty recommendations")
-
-    def testInvalidTitle(self):
-        ts = [
-            {"title": "Invalid Movie", "rating": 5.0},  # Incorrect key "title"
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertEqual(recommendations, [], "Invalid input should result in empty recommendations")
-
-    def testGibberishTitles(self):
-        ts = [{"title": "@#$%^", "rating": 5.0}]
-        recommendations = recommendForNewUser(ts)
-        self.assertEqual(recommendations, [], "Movies with gibberish titles should result in empty recommendations")
-
-    def testNegativeRatings(self):
-        ts = [
-            {"title": "Toy Story (1995)", "rating": -2.0},  # Negative rating
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertEqual(recommendations, [], "Negative ratings should result in empty recommendations")
-
-    def testMixValidInvalidRatings(self):
-        ts = [
-            {"title": "Toy Story (1995)", "rating": 5.0},
-            {"title": "Inception (2010)", "rating": 6.0},  # Invalid rating
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertEqual(recommendations, [], "Mix of valid and invalid ratings should result in empty recommendations")
-
-    def testTitlesWithLeadingTrailingSpaces(self):
-        ts = [
-            {"title": "  Batman (1989) ", "rating": 5.0},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertTrue("RoboCop (1987)" in recommendations)
-
-    def testEmptyRatingValue(self):
-        ts = [
-            {"title": "Inception (2010)", "rating": None},
-        ]
-        recommendations = recommendForNewUser(ts)
-        self.assertEqual(recommendations, [], "Empty rating value should result in empty recommendations")
+def test_logout_success(client, new_user):
+    # First, log in the user
+    client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    # Then, logout
+    response = client.post("/logout")
+    assert response.status_code == 200
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_logout_without_login(client):
+    response = client.post("/logout")
+    # Assuming it requires login, expect a 401 Unauthorized
+    assert response.status_code == 401
+
+def test_register_user_prefs_success(client, new_user):
+    # Log in first
+    client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    prefs = {"genre_list": ["Action", "Comedy"]}
+    response = client.post("/registeruserprefs", json=prefs)
+    assert response.status_code == 200
+    data = response.get_json()
+    assert "movie_list" in data
+    assert isinstance(data["movie_list"], list)
+
+def test_register_user_prefs_invalid_data(client, new_user):
+    # Log in first
+    client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    prefs = {"invalid_key": ["Action"]}
+    response = client.post("/registeruserprefs", json=prefs)
+    # Adjust based on your error handling
+    assert response.status_code == 400
+
+
+def test_get_movie_list_new_user(client, new_user):
+    # Log in first
+    client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    response = client.post("/getmovielist")
+    assert response.status_code == 200
+    data = response.get_json()
+    assert "movie_list" in data
+    assert isinstance(data["movie_list"], list)
+
+
+def test_get_movie_list_existing_user(client, new_user):
+    # Log in and set newuser to 0
+    client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    User.query.filter_by(username="testuser").update({"newuser": 0})
+    db.session.commit()
+    
+    response = client.post("/getmovielist")
+    assert response.status_code == 200
+    data = response.get_json()
+    assert "movie_list" in data
+    assert isinstance(data["movie_list"], list)
+
+
+def test_update_history_success(client, new_user):
+    # Log in first
+    client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    # Assume a recommendation exists
+    rec = Recommendation(user_id=new_user.id, movie_title="Test Movie")
+    db.session.add(rec)
+    db.session.commit()
+    
+    response = client.post("/updatehistory", json={"movie_title": "Test Movie"})
+    assert response.status_code == 200
+    updated_rec = Recommendation.query.filter_by(movie_title="Test Movie").first()
+    assert updated_rec.watched == 1
+
+
+def test_update_history_invalid_movie(client, new_user):
+    # Log in first
+    client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    response = client.post("/updatehistory", json={"movie_title": "Nonexistent Movie"})
+    # Adjust based on your error handling, possibly 404 or 200 with no changes
+    assert response.status_code == 200
+    # Verify that no movie was updated
+    rec = Recommendation.query.filter_by(movie_title="Nonexistent Movie").first()
+    assert rec is None
+
+
+def test_surprise_me_success(client, new_user, mocker):
+    # Mock the surprise_me function from core_algo
+    mock_surprise_me = mocker.patch('app.surprise_me', return_value=[("Surprise Movie", ["Details"])])
+    
+    # Log in first
+    client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    
+    response = client.post("/surpriseme")
+    assert response.status_code == 200
+    data = response.get_json()
+    assert "movie" in data
+    assert data["movie"] == "Details"
+    mock_surprise_me.assert_called_once()
+
+
+def test_sort_years_ascending(client, new_user, mocker):
+    # Mock the sort_year function from core_algo
+    mock_sort_year = mocker.patch('app.sort_year', return_value=(["Movie1", "Movie2"], ["Movie3"], ["2020", "2021"]))
+    
+    # Log in first
+    client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    
+    response = client.post("/sortyears", data="ascending")
+    assert response.status_code == 200
+    data = response.get_json()
+    assert "movie_list" in data
+    assert data["movie_list"] == ["Movie1", "Movie2"]
+    mock_sort_year.assert_called_with(True)
+
+
+def test_sort_years_descending(client, new_user, mocker):
+    # Mock the sort_year function from core_algo
+    mock_sort_year = mocker.patch('app.sort_year', return_value=(["Movie2", "Movie1"], ["Movie3"], ["2021", "2020"]))
+    
+    # Log in first
+    client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    
+    response = client.post("/sortyears", data="descending")
+    assert response.status_code == 200
+    data = response.get_json()
+    assert "movie_list" in data
+    assert data["movie_list"] == ["Movie2", "Movie1"]
+    mock_sort_year.assert_called_with(False)
+
+
+def test_search_year_existing(client, new_user, mocker):
+    # Mock the search_year function from core_algo
+    mock_search_year = mocker.patch('app.search_year', return_value=(["Movie1"], ["Movie2"], ["2021"]))
+    
+    # Log in first
+    client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    
+    response = client.post("/searchyear", json={"year": "2021"})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert "movie_list" in data
+    assert data["movie_list"] == ["Movie1"]
+    mock_search_year.assert_called_with("2021")
+
+
+def test_search_year_non_existing(client, new_user, mocker):
+    # Mock the search_year function from core_algo
+    mock_search_year = mocker.patch('app.search_year', return_value=([], [], []))
+    
+    # Log in first
+    client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    
+    response = client.post("/searchyear", json={"year": "1800"})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert "movie_list" in data
+    assert data["movie_list"] == []
+    mock_search_year.assert_called_with("1800")
+
+
+def test_search_query_matching(client, new_user, mocker):
+    # Mock the search_query function from core_algo
+    mock_search_query = mocker.patch('app.search_query', return_value=(["Matching Movie"], ["Other Movie"]))
+    
+    # Log in first
+    client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    
+    response = client.post("/searchquery", json={"contains": "Matching"})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert "movie_list" in data
+    assert data["movie_list"] == ["Matching Movie"]
+    mock_search_query.assert_called_with("Matching")
+
+
+def test_search_query_no_matches(client, new_user, mocker):
+    # Mock the search_query function from core_algo
+    mock_search_query = mocker.patch('app.search_query', return_value=([], []))
+    
+    # Log in first
+    client.post("/login", data={
+        "username": "testuser",
+        "password": "testpassword"
+    })
+    
+    response = client.post("/searchquery", json={"contains": "Nonexistent"})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert "movie_list" in data
+    assert data["movie_list"] == []
+    mock_search_query.assert_called_with("Nonexistent")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,242 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for mode changes */
+}
+
+/* Light Mode */
+body.light-mode {
+    background-color: #ffffff; /* White background for light mode */
+    color: #000000; /* Black text for light mode */
+}
+
+body.light-mode .header {
+    background-color: #f8f8f8; /* Light gray header background */
+    color: #000000; /* Black text in light mode */
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #1c1c1c; /* Dark background for dark mode */
+    color: #ffffff; /* White text for dark mode */
+}
+
+body.dark-mode .header {
+    background-color: #282c34; /* Dark gray header background */
+    color: #ffffff; /* White text in dark mode */
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* Navigation Links */
+nav {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+body.light-mode nav a {
+    color: #0073e6; /* Blue links in light mode */
+}
+
+body.dark-mode nav a {
+    color: #61dafb; /* Light blue links in dark mode */
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Toggle Button */
+.dark-mode-toggle {
+    margin-top: 15px;
+    background-color: #0073e6; /* Light mode button color */
+    color: #ffffff; /* Button text color */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+}
+
+body.dark-mode .dark-mode-toggle {
+    background-color: #ff4500; /* Red button in dark mode */
+}
+
+body.dark-mode .dark-mode-toggle:hover {
+    background-color: #e03e00; /* Darker red hover */
+}
+
+/* Other Elements (Preferences Section) */
+.preferences-container {
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-mode .preferences-container {
+    background-color: #f8f8f8; /* Light background for preferences */
+    color: #000000;
+}
+
+body.dark-mode .preferences-container {
+    background-color: #333333; /* Dark background for preferences */
+    color: #ffffff;
+}
+
+/* Genre Buttons */
+.genre-button {
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-mode .genre-button {
+    background-color: #e0e0e0;
+    color: #000000;
+}
+
+body.dark-mode .genre-button {
+    background-color: #444;
+    color: #ffffff;
+}
+
+.genre-button:hover {
+    background-color: #cccccc;
+}
+
+body.dark-mode .genre-button:hover {
+    background-color: #555;
+}
+
+/* Header Styling */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* Light Theme */
+.light-header {
+    background-color: #ffffff; /* Light background */
+    color: #000000; /* Black text */
+}
+
+.light-header .nav-link {
+    color: #0073e6; /* Blue for light mode links */
+}
+
+/* Dark Theme */
+.dark-header {
+    background-color: #282c34; /* Dark background */
+    color: #ffffff; /* White text */
+}
+
+.dark-header .nav-link {
+    color: #61dafb; /* Light blue links in dark mode */
+}
+
+/* Navigation Bar */
+.nav-bar {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    padding: 10px 15px;
+    background-color: #0073e6; /* Light mode button */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+}
+
+.dark-header .dark-mode-toggle {
+    background-color: #ff4500; /* Dark mode button */
+}
+
+.dark-header .dark-mode-toggle:hover {
+    background-color: #e03e00;
+}
+
+/* Language Selector */
+.language-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.language-label {
+    font-size: 1rem;
+}
+
+.language-select {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-header .language-select {
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
+}

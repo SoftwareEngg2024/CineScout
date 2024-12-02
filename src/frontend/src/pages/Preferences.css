@@ -1,0 +1,84 @@
+.preferences-container {
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 20px auto;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode Preferences */
+body.dark-mode .preferences-container {
+    background-color: #141414; /* Dark background */
+    color: white; /* White text */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Light Mode Preferences */
+body.light-mode .preferences-container {
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.preferences-container h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.genres-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.genre-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #333; /* Dark button background */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-mode .genre-button {
+    background-color: #e0e0e0; /* Light button background */
+    color: #000; /* Black text in light mode */
+}
+
+body.dark-mode .genre-button {
+    background-color: #444; /* Dark button background */
+    color: #fff; /* White text in dark mode */
+}
+
+.genre-button.selected {
+    background-color: #e50914; /* Netflix red */
+    font-weight: bold;
+}
+
+.genre-button:hover {
+    background-color: #ff7f7f; /* Lighter red on hover */
+}
+
+.save-button {
+    padding: 12px 25px;
+    font-size: 18px;
+    background-color: #e50914; /* Netflix red */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+body.light-mode .save-button {
+    background-color: #0073e6; /* Blue save button in light mode */
+}
+
+.save-button:hover {
+    background-color: #f40612; /* Darker red on hover */
+}

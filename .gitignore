@@ -1,13 +1,15 @@
 coverage
 .coveralls.yml
 # Byte-compiled / optimized / DLL files
+./*/__pycache__
 __pycache__/
 *.py[cod]
 *$py.class
 
 # C extensions
 *.so
-
+./node_modules
+./*/node_modules
 # Distribution / packaging
 .Python
 build/
@@ -65,6 +67,7 @@ db.sqlite3-journal
 
 # Flask stuff:
 instance/
+./*/instance/
 .webassets-cache
 
 # Scrapy stuff:

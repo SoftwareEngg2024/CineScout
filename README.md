@@ -1,152 +1,107 @@
-# <i>Movie Recommendation 🎥 </i>
-    A collaborative filtering based recommendation engine!
+<p align="center">
+<h1 align="center"><i>CineScout</i></h1>
 
+<a href="https://softwareengg2024.github.io/CineScout"><img alt="Documentation Status" src="https://img.shields.io/badge/Docs-pydoc-green"></a>
+<a href='https://coveralls.io/github/SoftwareEngg2024/CineScout?branch=ver_i'><img src='https://coveralls.io/repos/github/SoftwareEngg2024/CineScout/badge.svg?branch=ver_i' alt='Coverage Status' /></a>
+<a href="https://github.com/SoftwareEngg2024/CineScout/blob/ver_i/LICENSE.md"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green"></a>
+<a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+<a href="https://github.com/SoftwareEngg2024/CineScout/blob/ver_i/LICENSE.md"><img alt="License: MIT" src="https://img.shields.io/badge/Style_Checker-Pylance-green"></a>
+</p>
 
+[![test](https://github.com/se-hw1/CineScoutp3/actions/workflows/test_and_coverage.yml/badge.svg)](https://github.com/se-hw1/CineScoutp3/actions/workflows/test_and_coverage.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14226722.svg)](https://doi.org/10.5281/zenodo.14226722)
+[![Pytest](https://img.shields.io/badge/pytest-passing-brightgreen)](https://github.com/se-hw1/CineScoutp3/actions)
+[![codecoverage](https://img.shields.io/badge/CodeCoverage-passing-brightgreen)](https://github.com/se-hw1/CineScoutp3/actions/workflows/codecov.yml)
 
 
-[![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://github.com/MadhurDixit13)
 
 
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/ebanigogia/MovieRecommender/graphs/commit-activity) [![Contributors Activity](https://img.shields.io/github/commit-activity/m/MadhurDixit13/MovieRecommender)](https://github.com/ebanigogia/MovieRecommender/pulse) [![GitHub issues](https://img.shields.io/github/issues/MadhurDixit13/MovieRecommender.svg)](https://github.com/ebanigogia/MovieRecommender/issues) [![GitHub issues-closed](https://img.shields.io/github/issues-closed-raw/ebanigogia/MovieRecommender)](https://github.com/ebanigogia/MovieRecommender/issues?q=is%3Aissue+is%3Aclosed) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT) [![DOI](https://sandbox.zenodo.org/badge/720190225.svg)](https://sandbox.zenodo.org/doi/10.5072/zenodo.3401) [![Code Coverage](https://github.com/MadhurDixit13/MovieRecommender/actions/workflows/codecov.yml/badge.svg)](https://github.com/MadhurDixit13/MovieRecommender/actions/workflows/codecov.yml) [![codecov](https://codecov.io/gh/MadhurDixit13/MovieRecommender/graph/badge.svg?token=9NGWAJ7BST)](https://codecov.io/gh/MadhurDixit13/MovieRecommender) [![GitHub release](https://img.shields.io/github/release/git-ankit/MovieRecommender.svg)](https://github.com/ebanigogia/MovieRecommender/releases) [![black](https://img.shields.io/badge/StyleChecker-black-purple.svg)](https://pypi.org/project/black/) 
 
+## Introduction 
+Welcome to **CineScout**! 🍿✨ 
 
-Discover Your Next Movie Night Gem!<br>
-Tired of endless scrolling, trying to find the perfect movie? 🍿<br><br>
-<img width="400" height="250" alt="color picker" src="https://github.com/MadhurDixit13/MovieRecommender/blob/master/asset/Front-page.gif?raw=true" /><br><br>
+**CineScout** is a personalized movie recommendation engine designed to enhance your viewing experience by analyzing your preferences and watch history. By examining factors such as genres, actors, directors, and themes you enjoy, it tailors suggestions that align with your unique tastes. The engine also tracks your watch history, including completed movies and ratings, allowing it to refine its recommendations over time, ensuring they are always relevant. This personalized approach helps users discover new films they might not have come across on their own, based on their viewing patterns.
 
-# <b>Contents</b>
+The engine not only suggests popular films but also introduces new movies you may have overlooked, helping you discover hidden gems. As you continue to interact with CineScout, it learns from your choices and adapts, making each recommendation more accurate. The seamless integration with various streaming platforms and media players ensures that you can effortlessly explore new titles, while also allowing for user feedback to further refine the suggestions, ensuring a more engaging and personalized movie-watching experience.
 
-- [Introduction](https://github.com/MadhurDixit13/MovieRecommender#introduction-%EF%B8%8F)<br>
-- [Future Project Plan](https://github.com/MadhurDixit13/MovieRecommender#future-project-plan-%F0%9F%94%AE)<br>
-- [Video](https://github.com/MadhurDixit13/MovieRecommender#video-%EF%B8%8F)<br>
-- [Working](https://github.com/MadhurDixit13/MovieRecommender#working-)<br>
-- [Tech Stack](https://github.com/MadhurDixit13/MovieRecommender#tech-stack-)<br>
-- [Requirements and Setup](https://github.com/MadhurDixit13/MovieRecommender#requirements-and-setup-%EF%B8%8F)<br>
-- [Usage](https://github.com/MadhurDixit13/MovieRecommender#usage)<br>
-- [Documentation](https://github.com/MadhurDixit13/MovieRecommender#documentation-)<br>
-- [Bug](https://github.com/MadhurDixit13/MovieRecommender#bug-)<br>
-- [License](https://github.com/MadhurDixit13/MovieRecommender#license-%F0%9F%93%83)
+CineScout has everything you need to make movie night a breeze—so let’s dive in and start finding your perfect picks! 🌟
 
+## 🌟 New Features 🌟
+**Interactive Quizzes:**
 
+Engage in fun, personalized quizzes designed to analyze your preferences and provide tailored movie recommendations that suit your taste.
 
-## Introduction 👁️
+**Seasonal Suggestions:**
 
-Say hello to our Movie Recommender! 🚀<br>
-Just tell us what type of movies you like, and we'll serve up a handpicked list of 10 must-watch movies tailored to your taste. No more movie-night dilemmas! 🎬<br>
-Save time, ditch the hassle, and let Movie Recommender do the work for you. Movie night has never been this easy and exciting! 🌟<br>
-Your perfect movie is just a click away. Get started now and make every movie night a hit! 👏<br><br>
-![Hurray](https://media.giphy.com/media/jwY84621p1hhnG0ANK/giphy.gif)
+Enjoy movie recommendations based on seasonal events like Halloween, Christmas, or summer blockbusters, ensuring the perfect match for your mood and the occasion.
 
+**Gamified Movie-Watching:**
 
+Unlock badges and rewards as you explore new genres, complete challenges, or hit milestones like watching a specific number of films.
 
+**Friend-Suggested Content:**
 
-## Future Project Plan 🔮
+See what movies your friends are watching and the past movies that they watched. Rate the movies that your friends have watched and share movie recommendations with friends, creating a social movie discovery experience. Plan movie nights with your friends as well. 
 
-Testing how good the Movie Recommender is :
+**Enhanced Password Security:**
 
-1. Build a new feature that exhibits diversity across genres, casting choices, and production styles.
-2. An email to be sent to users with the list of movies recommended to them
-3. The user accounts can keep a record of the feedback given by them (liked, disliked or yet to watch).
+Strengthen account security with password strength checks, ensuring users create strong and secure passwords. 
 
+**Theme Customization: Light & Dark Modes:**
 
-Note: Our system can be virtually tested through Github Actions inbuilt feature of build and test queries using python.
+Switch between light and dark modes for a more comfortable viewing experience, allowing users to choose the theme that suits their preferences and lighting conditions. Enjoy a personalized visual experience that adapts to your environment and mood.
 
-Make sure you taste your own medicine first and take into account other peoples familiarity with the system before you design your tests.
+**Watchlist Feature:**
 
+Create a personalized watchlist to save your favorite movies, making it easy to revisit or watch them later without losing track.
 
-## Video ▶️ 
+## Future Scope🚀
 
-[![Watch the video](https://markdown-videos-api.jorgenkh.no/youtube/303Q73iKKPw)](https://youtu.be/303Q73iKKPw)
+**Push Notifications:**
 
+Stay updated with personalized alerts about new releases, additions to your favorite genres, or changes to your watchlist in real time.
 
+**Search History:**
 
+Access a comprehensive history of your past searches, enabling you to quickly revisit movies or genres you explored previously.
 
+**Integration with Streaming Services:**
 
+Seamlessly find where movies are available to stream, making it convenient to enjoy your favorites without switching platforms.
 
-## Working 📱
+**Profile Customization:**
 
-Below working displays the system also evaluates movie attributes such as genre, cast, director, and user-generated reviews. 
-- By combining these user-specific data and film characteristics, the recommender system employs machine learning to generate tailored movie recommendations.
-- This enables users to discover new films that align with their individual tastes, making the movie-watching experience more enjoyable and engaging.
-- The users can directly watch the trailer of any movie recommended to them. 
-- Furthermore, recommender systems often employ a feedback loop, where users' interactions and feedback help refine the recommendations over time, ensuring that the suggestions remain relevant.
-- The users can register and log in to their accounts to keep a history of the movies recommended for them.
+Personalize your profile by uploading avatars, setting preferences, and curating a unique user experience tailored to your style.
 
+## Check out our enhancements!
 
+[**Demo**](https://www.youtube.com/watch?v=Q_KPwbQzzXg)
 
+## Tech Stack 
 
+- React JS
+- Python
+- Flask
+- CSS
 
 
-## Tech stack 👨‍💻
-<details>
-<summary>Python</summary>
+## Requirements and Setup
+[Installation Instructions](https://github.com/se-hw1/CineScoutp3/edit/newbr1/INSTALL.md)
 
-Python is a high-level, general-purpose programming language known for its simplicity and readability. It's a widely used language for web development, data analysis, artificial intelligence, and more.
 
-![Python](https://media.giphy.com/media/2vnId4IaAjIGZd2EWC/giphy.gif)
-</details>
+## Team Members
 
-<details>
-<summary>Flask</summary>
+1. Navyatej Tummala (navyatej3112) [GitHub Profile](https://github.com/navyatej3112)
+2. Sasidhar Appalla  (sasidharappalla) [GitHub Profile](https://github.com/sasidharappalla)
+3. Niranjan Rajendran (Niranjan30) [GitHub Profile](https://github.com/Niranjan30)
 
-Flask is a micro web framework written in Python. It's lightweight and easy to use for building web applications, making it an excellent choice for small to medium-sized projects.
+## Contribution
 
-![Flask](https://miro.medium.com/v2/resize:fit:679/0*Nh_pliddv1BFAx68.gif)
-</details>
+Please refer the [CONTRIBUTING.md](https://github.com/se-hw1/CineScoutp3/blob/newbr1/CONTRIBUTING.md) file for instructions on how to contribute to our repository.
 
-<details>
-<summary>HTML</summary>
-
-HTML (Hypertext Markup Language) is the standard markup language for creating web pages and web applications. It's used for structuring the content on the web.
-
-![HTML](https://media.giphy.com/media/l3vRfNA1p0rvhMSvS/giphy.gif)
-</details>
-
-<details>
-<summary>CSS</summary>
-
-CSS (Cascading Style Sheets) is a style sheet language used for describing the look and formatting of a document written in HTML. It's essential for web design and layout.
-
-![CSS](https://alvaromontoro.com/images/blog/css-typewriter.gif)
-</details>
-
-<details>
-<summary>JavaScript</summary>
-
-JavaScript is a versatile and widely used programming language for adding interactivity and dynamic behavior to web pages. It's essential for client-side web development.
-
-![JavaScript](https://media.giphy.com/media/SvFocn0wNMx0iv2rYz/giphy.gif)
-</details>
-
-## Requirements and Setup ⚙️
-
-
-- python 3.5 +
-- pip
-- Style check  - black
-    `pip install black`
-- Static code analyser - Pylance
-    `Install it in VS Code`
-
-- Install all required python packages
-    `pip install -r requirements.txt `
-
-## Usage
-1. `cd Code/recommenderapp`
-2. `python3 app.py`
-
-![Execution](https://raw.githubusercontent.com/MadhurDixit13/MovieRecommender/master/asset/execution.gif)
-
-
-## Documentation 📚
-Refer to Wiki page [here](https://github.com/ebanigogia/MovieRecommender/wiki/Delta-(Project-3))
-
-## Chat Channel 🗣️
-Refer to our chats [here](https://discord.com/channels/1164337248746082394/1164337249387823152)
-
-## Bug? 🐛
-Raise an issue on this repository, we would love to look at it ❤️
+## Bug
+Raise an issue on this repository, we would love to look at it!
 
 ## License 📃
 This project is under MIT License.
